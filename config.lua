@@ -3,4 +3,5 @@ function gameInit(...)
 	
 	-- love.graphics.setBackgroundColor(255, 255, 255, 5)
 	-- love.graphics.setColor(0, 0, 0, 5)
+	 love.keyboard.setKeyRepeat(true)
 end

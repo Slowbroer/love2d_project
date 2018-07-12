@@ -1,46 +1,34 @@
-
-require("config")
-
-local x = 50
-local y = 100
-local text = "A"
-
 function love.load()
-	gameInit()
-	-- x, y, w, h = 0, 0, 0, 20
-	-- love.graphics.setBackgroundColor(255, 255, 255, 5)
+    animation = newAnimation(love.graphics.newImage("oldHero.png"), 16, 18, 1)
 end
-
-
+ 
 function love.update(dt)
-	-- body
-	if love.keyboard.isDown("left") then 
-		if x>=0 then
-		    x = x - 1
-		end
-	end
-	if love.keyboard.isDown("right") then
-		if x<=290 then
-		    --do
-		    x = x + 1
-		end
-	end
-	if love.keyboard.isDown("up") then
-		if y>=0 then
-		    y = y - 1
-		end
-	end
-
-	if love.keyboard.isDown("down") then
-		if y<=285 then
-		    y = y + 1
-		end
-	end
+    animation.currentTime = animation.currentTime + dt
+    if animation.currentTime >= animation.duration then
+        animation.currentTime = animation.currentTime - animation.duration
+    end
 end
+ 
 function love.draw()
-	love.graphics.print(x..","..y)
-	-- local height = love.graphics.getHeight()
-	-- love.graphics.print(height)
-	
-	love.graphics.print(text, x, y)
-end 
+    -- love.graphics.print(animation.currentTime, 100, 200)
+    local spriteNum = math.floor(animation.currentTime / animation.duration * #animation.quads) + 1
+    love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], 0, 0, 0, 4)
+end
+ 
+function newAnimation(image, width, height, duration)
+    local animation = {}
+    animation.spriteSheet = image;
+    animation.quads = {};
+ 
+    for y = 0, image:getHeight() - height, height do
+        love.graphics.print(y, 200, 200)
+        for x = 0, image:getWidth() - width, width do
+            table.insert(animation.quads, love.graphics.newQuad(x, y, width, height, image:getDimensions()))
+        end
+    end
+ 
+    animation.duration = duration or 1
+    animation.currentTime = 0
+ 
+    return animation
+end

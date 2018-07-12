@@ -1,0 +1,110 @@
+
+require("config")
+
+local x = 50
+local y = 100
+local text = "A"
+
+function love.load()
+	gameInit()
+	-- x, y, w, h = 0, 0, 0, 20
+	-- love.graphics.setBackgroundColor(255, 255, 255, 5)
+end
+
+
+function love.update(dt)
+	-- body
+	if love.keyboard.isDown("left") then 
+		if x>=0 then
+		    x = x - 1
+		end
+	end
+	if love.keyboard.isDown("right") then
+		if x<=290 then
+		    --do
+		    x = x + 1
+		end
+	end
+	if love.keyboard.isDown("up") then
+		if y>=0 then
+		    y = y - 1
+		end
+	end
+
+	if love.keyboard.isDown("down") then
+		if y<=285 then
+		    y = y + 1
+		end
+	end
+end
+
+function love.keypressed(key,isrepeat)
+	-- body
+	-- if key == "left" then 
+	-- 	if x>=0 then
+	-- 	    x = x - 1
+	-- 	end
+	-- end
+	-- if key == "right" then
+	-- 	if x<=290 then
+	-- 	    --do
+	-- 	    x = x + 1
+	-- 	end
+	-- end
+	-- if key == "up" then
+	-- 	if y>=0 then
+	-- 	    y = y - 1
+	-- 	end
+	-- end
+
+	-- if key == "down" then
+	-- 	if y<=285 then
+	-- 	    y = y + 1
+	-- 	end
+	-- end
+end
+
+function love.keyreleased(key)
+	-- local a = 5
+	-- if key == "left" then 
+	-- 	while a>=0 do
+	-- 		if x>=0 then
+	-- 	    	x = x - 1
+	-- 		end
+	-- 		a = a - 1
+	-- 	end
+	-- end
+	-- if key == "right" then
+	-- 	while a>=0 do
+	-- 		if x<=290 then
+	-- 	    --do
+	-- 		    x = x + 1
+	-- 		end
+	-- 		a = a - 1
+	-- 	end
+	-- end
+	-- if key == "up" then
+	-- 	while a>=0 do
+	-- 		if y>=0 then
+	-- 		    y = y - 1
+	-- 		end
+	-- 		a = a - 1
+	-- 	end
+	-- end
+
+	-- if key == "down" then
+	-- 	while a>=0 do
+	-- 		if y<=285 then
+	-- 		    y = y + 1
+	-- 		end
+	-- 		a = a - 1
+	-- 	end
+	-- end
+end
+function love.draw()
+	love.graphics.print(x..","..y)
+	-- local height = love.graphics.getHeight()
+	-- love.graphics.print(height)
+	
+	love.graphics.print(text, x, y)
+end 
